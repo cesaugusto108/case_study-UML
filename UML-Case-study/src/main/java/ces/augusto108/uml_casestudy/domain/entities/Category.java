@@ -1,12 +1,18 @@
 package ces.augusto108.uml_casestudy.domain.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class Category implements Serializable {
     private static final long serialVersionUID = -4488149201904092962L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "category_name")
     private String name;
 
     public Category() {
