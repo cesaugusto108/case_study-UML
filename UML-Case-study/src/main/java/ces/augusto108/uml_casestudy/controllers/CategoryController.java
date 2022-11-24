@@ -1,21 +1,22 @@
 package ces.augusto108.uml_casestudy.controllers;
 
 import ces.augusto108.uml_casestudy.domain.entities.Category;
+import ces.augusto108.uml_casestudy.services.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryController {
-    @GetMapping(value = "/list")
-    public List<Category> list() {
-        Category category1 = new Category(1, "Computers");
-        Category category2 = new Category(2, "Office");
+    @Autowired
+    private CategoryService categoryService;
 
-        return Arrays.asList(category1, category2);
+    @GetMapping(value = "/list/{id}")
+    public ResponseEntity<Category> findById(@PathVariable Integer id) {
+        return ResponseEntity.ok(categoryService.findById(id));
     }
 }
