@@ -1,13 +1,9 @@
 package ces.augusto108.uml_casestudy;
 
-import ces.augusto108.uml_casestudy.domain.entities.Category;
-import ces.augusto108.uml_casestudy.domain.entities.City;
-import ces.augusto108.uml_casestudy.domain.entities.Product;
-import ces.augusto108.uml_casestudy.domain.entities.State;
-import ces.augusto108.uml_casestudy.repositories.CategoryRepository;
-import ces.augusto108.uml_casestudy.repositories.CityRepository;
-import ces.augusto108.uml_casestudy.repositories.ProductRepository;
-import ces.augusto108.uml_casestudy.repositories.StateRepository;
+import ces.augusto108.uml_casestudy.domain.entities.*;
+import ces.augusto108.uml_casestudy.domain.enums.ClientType;
+import ces.augusto108.uml_casestudy.repositories.*;
+import org.aspectj.lang.annotation.Around;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -33,6 +29,12 @@ public class UmlCaseStudyApplication implements CommandLineRunner {
 
     @Autowired
     CityRepository cityRepository;
+
+    @Autowired
+    ClientRepository clientRepository;
+
+    @Autowired
+    AddressRepository addressRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -68,5 +70,21 @@ public class UmlCaseStudyApplication implements CommandLineRunner {
 
         stateRepository.saveAll(Arrays.asList(state1, state2));
         cityRepository.saveAll(Arrays.asList(city1, city2, city3));
+
+        //
+
+        Client client1 = new Client(null, "Maria Silva", "maria@email.com", "982.998.008-29", ClientType.INDIVIDUAL);
+
+        Address address1 = new Address(null, "Rua Principal", "2823", "Centro", "98988-989", null, city1);
+        Address address2 = new Address(null, "Avenida Secundária", "928", "Limoeiro", "98874-000", "Casa A", city2);
+
+        client1.getAddresses().addAll(Arrays.asList(address1, address2));
+        client1.getTelephones().addAll(Arrays.asList("11999890928", "1132980928"));
+
+        address1.getClients().add(client1);
+        address2.getClients().add(client1);
+
+        clientRepository.save(client1);
+        addressRepository.saveAll(Arrays.asList(address1, address2));
     }
 }
