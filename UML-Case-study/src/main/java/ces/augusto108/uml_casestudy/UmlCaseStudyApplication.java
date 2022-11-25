@@ -73,10 +73,33 @@ public class UmlCaseStudyApplication implements CommandLineRunner {
 
         //
 
-        Client client1 = new Client(null, "Maria Silva", "maria@email.com", "982.998.008-29", ClientType.INDIVIDUAL);
+        Client client1 = new Client(
+                null,
+                "Maria Silva",
+                "maria@email.com",
+                "982.998.008-29",
+                ClientType.INDIVIDUAL
+        );
 
-        Address address1 = new Address(null, "Rua Principal", "2823", "Centro", "98988-989", null, city1);
-        Address address2 = new Address(null, "Avenida Secundária", "928", "Limoeiro", "98874-000", "Casa A", city2);
+        Address address1 = new Address(
+                null,
+                "Rua Principal",
+                "2823",
+                "Centro",
+                "98988-989",
+                null,
+                city1
+        );
+
+        Address address2 = new Address(
+                null,
+                "Avenida Secundária",
+                "928",
+                "Limoeiro",
+                "98874-000",
+                "Casa A",
+                city2
+        );
 
         client1.getAddresses().addAll(Arrays.asList(address1, address2));
         client1.getTelephones().addAll(Arrays.asList("11999890928", "1132980928"));
