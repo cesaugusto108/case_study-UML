@@ -8,11 +8,13 @@ public class StandardError implements Serializable {
     private final Integer httpResponseStatus;
     private final String message;
     private final Long timeStamp;
+    private final String httpMethod;
 
-    public StandardError(Integer httpResponseStatus, String message, Long timeStamp) {
+    public StandardError(Integer httpResponseStatus, String message, Long timeStamp, String httpMethod) {
         this.httpResponseStatus = httpResponseStatus;
         this.message = message;
         this.timeStamp = timeStamp;
+        this.httpMethod = httpMethod;
     }
 
     public Integer getHttpResponseStatus() {
@@ -25,5 +27,9 @@ public class StandardError implements Serializable {
 
     public Long getTimeStamp() {
         return timeStamp;
+    }
+
+    public String getHttpMethod() {
+        return httpMethod;
     }
 }

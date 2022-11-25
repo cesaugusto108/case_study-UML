@@ -18,7 +18,8 @@ public class ControllerExceptionHandler {
         StandardError standardError = new StandardError(
                 HttpStatus.NOT_FOUND.value(),
                 e.getMessage(),
-                System.currentTimeMillis()
+                System.currentTimeMillis(),
+                httpServletRequest.getMethod()
         );
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
