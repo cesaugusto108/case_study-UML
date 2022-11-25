@@ -33,6 +33,9 @@ public class Client implements Serializable {
     @CollectionTable(name = "telephone")
     private final Set<String> telephones = new HashSet<>();
 
+    public Client() {
+    }
+
     public Client(Integer id, String name, String email, String identification, ClientType type) {
         this.id = id;
         this.name = name;

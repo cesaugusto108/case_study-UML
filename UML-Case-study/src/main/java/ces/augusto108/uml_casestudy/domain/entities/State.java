@@ -1,5 +1,7 @@
 package ces.augusto108.uml_casestudy.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class State implements Serializable {
     @Column(name = "state_name")
     private String name;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "state")
     private List<City> cities = new ArrayList<>();
 
