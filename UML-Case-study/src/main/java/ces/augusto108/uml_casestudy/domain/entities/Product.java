@@ -1,5 +1,7 @@
 package ces.augusto108.uml_casestudy.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
@@ -25,6 +27,7 @@ public class Product implements Serializable {
     @Min(0L)
     private Double price;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(
             name = "product_category",
