@@ -36,6 +36,14 @@ public class Product implements Serializable {
     )
     List<Category> categories = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "product_purchase",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "purchase_id")
+    )
+    List<Purchase> purchases = new ArrayList<>();
+
     public Product() {
     }
 
