@@ -3,7 +3,9 @@ package ces.augusto108.uml_casestudy.domain.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Purchase implements Serializable {
@@ -26,6 +28,9 @@ public class Purchase implements Serializable {
     @ManyToOne
     @JoinColumn(name = "shipping_address_id")
     private Address shippingAddress;
+
+    @OneToMany(mappedBy = "id.purchase")
+    private final Set<PurchaseItem> items = new HashSet<>();
 
     public Purchase() {
     }
@@ -75,6 +80,10 @@ public class Purchase implements Serializable {
 
     public void setShippingAddress(Address shippingAddress) {
         this.shippingAddress = shippingAddress;
+    }
+
+    public Set<PurchaseItem> getItems() {
+        return items;
     }
 
     @Override

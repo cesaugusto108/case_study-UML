@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Product implements Serializable {
@@ -34,7 +32,7 @@ public class Product implements Serializable {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    List<Category> categories = new ArrayList<>();
+    public List<Category> categories = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -42,7 +40,10 @@ public class Product implements Serializable {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "purchase_id")
     )
-    List<Purchase> purchases = new ArrayList<>();
+    public List<Purchase> purchases = new ArrayList<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private final Set<PurchaseItem> items = new HashSet<>();
 
     public Product() {
     }
@@ -92,6 +93,20 @@ public class Product implements Serializable {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    public List<Purchase> getPurchases() {
+        List<Purchase> purchaseList = new ArrayList<>();
+
+        for (PurchaseItem item : items) {
+            purchaseList.add(item.getPurchase());
+        }
+
+        return purchaseList;
+    }
+
+    public Set<PurchaseItem> getItems() {
+        return items;
     }
 
     @Override

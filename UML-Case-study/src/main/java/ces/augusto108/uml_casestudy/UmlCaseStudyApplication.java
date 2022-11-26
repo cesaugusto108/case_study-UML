@@ -43,6 +43,9 @@ public class UmlCaseStudyApplication implements CommandLineRunner {
     @Autowired
     PaymentRepository paymentRepository;
 
+    @Autowired
+    PurchaseItemRepository purchaseItemRepository;
+
     @Override
     public void run(String... args) throws Exception {
         Category category1 = new Category(null, "Computers");
@@ -138,5 +141,20 @@ public class UmlCaseStudyApplication implements CommandLineRunner {
 
         purchaseRepository.saveAll(Arrays.asList(purchase1, purchase2));
         paymentRepository.saveAll(Arrays.asList(payment1, payment2));
+
+        //
+
+        PurchaseItem item1 = new PurchaseItem(purchase1, product1, 0.0, 1, 3250.00);
+        PurchaseItem item2 = new PurchaseItem(purchase1, product3, 0.0, 1, 65.90);
+        PurchaseItem item3 = new PurchaseItem(purchase2, product2, 0.0, 1, 2290.00);
+
+        purchase1.getItems().addAll(Arrays.asList(item1, item2));
+        purchase2.getItems().add(item3);
+
+        product1.getItems().add(item1);
+        product2.getItems().add(item3);
+        product3.getItems().add(item2);
+
+        purchaseItemRepository.saveAll(Arrays.asList(item1, item2, item3));
     }
 }
