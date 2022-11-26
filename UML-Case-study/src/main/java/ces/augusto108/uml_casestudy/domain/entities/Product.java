@@ -1,6 +1,7 @@
 package ces.augusto108.uml_casestudy.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -42,6 +43,7 @@ public class Product implements Serializable {
     )
     public List<Purchase> purchases = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.product")
     private final Set<PurchaseItem> items = new HashSet<>();
 
@@ -95,6 +97,7 @@ public class Product implements Serializable {
         this.categories = categories;
     }
 
+    @JsonIgnore
     public List<Purchase> getPurchases() {
         List<Purchase> purchaseList = new ArrayList<>();
 

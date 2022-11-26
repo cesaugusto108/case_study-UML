@@ -1,6 +1,8 @@
 package ces.augusto108.uml_casestudy.domain.entities;
 
 import ces.augusto108.uml_casestudy.domain.enums.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,6 +19,7 @@ public abstract class Payment implements Serializable {
     @Column(name = "payment_status")
     private Integer status;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "purchase_id")
     @MapsId
@@ -47,11 +50,12 @@ public abstract class Payment implements Serializable {
         this.status = status.getId();
     }
 
-    public Purchase getProductOrder() {
+    @JsonIgnore
+    public Purchase getPurchase() {
         return purchase;
     }
 
-    public void setProductOrder(Purchase purchase) {
+    public void setPurchase(Purchase purchase) {
         this.purchase = purchase;
     }
 

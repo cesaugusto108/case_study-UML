@@ -1,8 +1,9 @@
 package ces.augusto108.uml_casestudy.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ import java.util.Objects;
 public class PurchaseItem implements Serializable {
     private static final long serialVersionUID = -8443956323323554493L;
 
+    @JsonIgnore
     @EmbeddedId
     private final PurchaseItemPrimaryKey id = new PurchaseItemPrimaryKey();
 
@@ -28,6 +30,7 @@ public class PurchaseItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Purchase getPurchase() {
         return id.getPurchase();
     }
