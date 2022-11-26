@@ -2,7 +2,7 @@ package ces.augusto108.uml_casestudy.domain.entities;
 
 import ces.augusto108.uml_casestudy.domain.enums.ClientType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,7 +26,6 @@ public class Client implements Serializable {
     private String identification;
     private Integer type;
 
-    @JsonManagedReference
     @ManyToMany(mappedBy = "clients")
     private final List<Address> addresses = new ArrayList<>();
 
@@ -34,7 +33,7 @@ public class Client implements Serializable {
     @CollectionTable(name = "telephone")
     private final Set<String> telephones = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private final List<Purchase> purchases = new ArrayList<>();
 

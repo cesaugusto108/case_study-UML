@@ -1,7 +1,5 @@
 package ces.augusto108.uml_casestudy.domain.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,7 +15,6 @@ public class City implements Serializable {
     @Column(name = "city_name")
     private String name;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "state_id")
     private State state;

@@ -1,7 +1,6 @@
 package ces.augusto108.uml_casestudy.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,11 +21,9 @@ public class Purchase implements Serializable {
     @Column(name = "purchase_instant")
     private Date instant;
 
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "purchase")
     private Payment payment;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
