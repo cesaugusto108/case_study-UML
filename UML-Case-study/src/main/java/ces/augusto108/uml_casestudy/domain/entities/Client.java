@@ -1,7 +1,6 @@
 package ces.augusto108.uml_casestudy.domain.entities;
 
 import ces.augusto108.uml_casestudy.domain.enums.ClientType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
