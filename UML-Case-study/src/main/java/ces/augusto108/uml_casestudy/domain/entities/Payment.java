@@ -15,7 +15,7 @@ public abstract class Payment implements Serializable {
     private Integer id;
 
     @Column(name = "payment_status")
-    private PaymentStatus status;
+    private Integer status;
 
     @OneToOne
     @JoinColumn(name = "purchase_id")
@@ -27,7 +27,7 @@ public abstract class Payment implements Serializable {
 
     public Payment(Integer id, PaymentStatus status, Purchase purchase) {
         this.id = id;
-        this.status = status;
+        this.status = status.getId();
         this.purchase = purchase;
     }
 
@@ -40,11 +40,11 @@ public abstract class Payment implements Serializable {
     }
 
     public PaymentStatus getStatus() {
-        return status;
+        return PaymentStatus.convertToEnum(status);
     }
 
     public void setStatus(PaymentStatus status) {
-        this.status = status;
+        this.status = status.getId();
     }
 
     public Purchase getProductOrder() {

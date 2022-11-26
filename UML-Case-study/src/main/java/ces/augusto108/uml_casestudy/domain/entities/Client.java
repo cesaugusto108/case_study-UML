@@ -95,7 +95,7 @@ public class Client implements Serializable {
         return telephones;
     }
 
-    public List<Purchase> getOrders() {
+    public List<Purchase> getPurchases() {
         return purchases;
     }
 

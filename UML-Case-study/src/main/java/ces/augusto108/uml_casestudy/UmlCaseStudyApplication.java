@@ -2,15 +2,16 @@ package ces.augusto108.uml_casestudy;
 
 import ces.augusto108.uml_casestudy.domain.entities.*;
 import ces.augusto108.uml_casestudy.domain.enums.ClientType;
+import ces.augusto108.uml_casestudy.domain.enums.PaymentStatus;
 import ces.augusto108.uml_casestudy.repositories.*;
-import org.aspectj.lang.annotation.Around;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Date;
 
 @SpringBootApplication
 public class UmlCaseStudyApplication implements CommandLineRunner {
@@ -35,6 +36,12 @@ public class UmlCaseStudyApplication implements CommandLineRunner {
 
     @Autowired
     AddressRepository addressRepository;
+
+    @Autowired
+    PurchaseRepository purchaseRepository;
+
+    @Autowired
+    PaymentRepository paymentRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -109,5 +116,27 @@ public class UmlCaseStudyApplication implements CommandLineRunner {
 
         clientRepository.save(client1);
         addressRepository.saveAll(Arrays.asList(address1, address2));
+
+        //
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+
+        Date date1 = simpleDateFormat.parse("18/11/2022 10:22");
+        Purchase purchase1 = new Purchase(null, date1, client1, address1);
+
+        Date date2 = simpleDateFormat.parse("20/11/2022 12:20");
+        Purchase purchase2 = new Purchase(null, date2, client1, address2);
+
+        Payment payment1 = new CreditCardPayment(null, PaymentStatus.CONFIRMED, purchase1, 1);
+        purchase1.setPayment(payment1);
+
+        Date date3 = simpleDateFormat.parse("05/12/2022 00:00");
+        Payment payment2 = new TicketPayment(null, PaymentStatus.PENDING, purchase2, date3, null);
+        purchase2.setPayment(payment2);
+
+        client1.getPurchases().addAll(Arrays.asList(purchase1, purchase2));
+
+        purchaseRepository.saveAll(Arrays.asList(purchase1, purchase2));
+        paymentRepository.saveAll(Arrays.asList(payment1, payment2));
     }
 }

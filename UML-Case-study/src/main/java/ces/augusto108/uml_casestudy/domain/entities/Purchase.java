@@ -30,10 +30,9 @@ public class Purchase implements Serializable {
     public Purchase() {
     }
 
-    public Purchase(Integer id, Date instant, Payment payment, Client client, Address shippingAddress) {
+    public Purchase(Integer id, Date instant, Client client, Address shippingAddress) {
         this.id = id;
         this.instant = instant;
-        this.payment = payment;
         this.client = client;
         this.shippingAddress = shippingAddress;
     }
