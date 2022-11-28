@@ -18,7 +18,7 @@ public class ClientController {
         return ResponseEntity.ok(clientService.findById(id));
     }
 
-    @PostMapping(value = "add")
+    @PostMapping(value = "/add")
     public void save(
             @RequestParam String name,
             @RequestParam String email,
