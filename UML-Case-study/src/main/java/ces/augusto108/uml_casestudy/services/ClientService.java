@@ -1,6 +1,5 @@
 package ces.augusto108.uml_casestudy.services;
 
-import ces.augusto108.uml_casestudy.domain.entities.Category;
 import ces.augusto108.uml_casestudy.domain.entities.Client;
 import ces.augusto108.uml_casestudy.repositories.ClientRepository;
 import ces.augusto108.uml_casestudy.services.exceptions.InstanceNotFoundException;
@@ -15,7 +14,7 @@ public class ClientService {
     public Client findById(Integer id) {
         return clientRepository.findById(id).orElseThrow(
                 () -> new InstanceNotFoundException(
-                        "Instance not found. Id: " + id + ", Type: " + Category.class.getName()
+                        "Instance not found. Id: " + id + ", Type: " + Client.class.getName()
                 )
         );
     }
