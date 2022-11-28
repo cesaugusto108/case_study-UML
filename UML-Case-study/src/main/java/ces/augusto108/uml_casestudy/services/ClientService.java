@@ -19,4 +19,8 @@ public class ClientService {
                 )
         );
     }
+
+    public void save(Client client) {
+        clientRepository.save(client);
+    }
 }
